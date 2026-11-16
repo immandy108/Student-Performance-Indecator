@@ -17,7 +17,6 @@ Under the hood, it trains multiple regression models, picks the best one automat
 ```
 mlproject/
 │
-├── app.py                        # Flask entry point (local dev with debug=True)
 ├── application.py                # Flask entry point (AWS EB production)
 ├── setup.py                     # Package installer — registers `src` as installable
 ├── requirements.txt              # All Python dependencies
@@ -131,7 +130,7 @@ This runs the full pipeline in sequence: ingestion → transformation → traini
 ### 3. Run the web app (local)
 
 ```bash
-python app.py
+python application.py
 ```
 
 Open your browser at `http://127.0.0.1:5000`. Go to `/predictdata` to fill in the form and get a prediction.
@@ -148,30 +147,6 @@ Open your browser at `http://127.0.0.1:5000`. Go to `/predictdata` to fill in th
 
 ---
 
-## 🏗️ Deployment — AWS Elastic Beanstalk
-
-This project is already set up for AWS EB deployment.
-
-The `.ebextensions/python.config` file tells Elastic Beanstalk to use `application.py` as the WSGI entry point:
-
-```yaml
-option_settings:
-  "aws:elasticbeanstalk:container:python":
-    WSGIPath: application:application
-```
-
-**Key distinction:**
-- `app.py` — local dev, runs with `debug=True`
-- `application.py` — production, runs without debug mode (required by AWS EB)
-
-To deploy:
-```bash
-eb init
-eb create
-eb deploy
-```
-
----
 
 ## 📦 Dependencies
 
