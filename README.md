@@ -4,7 +4,7 @@ A complete, end-to-end Machine Learning project that predicts a student's **Math
 
 ---
 
-## 📌 What This Project Does
+## What This Project Does
 
 You give the app some basic information about a student — their background, lunch type, whether they completed a test prep course, and their reading/writing scores — and it tells you what math score they're likely to get. That's it. Simple input, meaningful output.
 
@@ -12,7 +12,7 @@ Under the hood, it trains multiple regression models, picks the best one automat
 
 ---
 
-## 🗂️ Folder Structure
+## Folder Structure 
 
 ```
 mlproject/
@@ -65,32 +65,7 @@ mlproject/
 
 ---
 
-## ⚙️ How the ML Pipeline Works
-
-```
-notebook/data/stud.csv
-        │
-        ▼
-  DataIngestion              → splits into train.csv / test.csv
-        │
-        ▼
-  DataTransformation         → numerical: median impute + StandardScaler
-                               categorical: mode impute + OneHotEncoder + StandardScaler
-                               saves preprocessor.pkl
-        │
-        ▼
-  ModelTrainer               → trains 8 models with GridSearchCV (3-fold CV)
-                               picks best R² score (threshold: > 0.60)
-                               saves model.pkl
-        │
-        ▼
-  PredictPipeline            → loads model.pkl + preprocessor.pkl
-                               transforms input → returns math score
-```
-
----
-
-## 🤖 Models Compared
+## Models Compared
 
 | Model | Hyperparameters Tuned |
 |---|---|
@@ -107,19 +82,19 @@ The best model is automatically selected by **test set R² score** and saved. If
 
 ---
 
-## 🚀 Setup & Run
+## Setup & Run
 
-### 1. Clone and install
+### Clone and install
 
 ```bash
-git clone <your-repo-url>
-cd mlproject
+git clone <https://github.com/immandy108/Student-Performance-Indecator.git>
+cd Student_Performance_Indecator
 pip install -r requirements.txt
 ```
 
-> The `-e .` in `requirements.txt` runs `setup.py` automatically, so the `src` package is importable from anywhere in the project.
+-> The `-e .` in `requirements.txt` runs `setup.py` automatically, so the `src` package is importable from anywhere in the project.
 
-### 2. Train the model
+### Train the model
 
 ```bash
 python src/components/data_ingestion.py
@@ -127,7 +102,7 @@ python src/components/data_ingestion.py
 
 This runs the full pipeline in sequence: ingestion → transformation → training. After this, you'll see `artifacts/model.pkl` and `artifacts/preprocessor.pkl` created.
 
-### 3. Run the web app (local)
+### Run the web app (local)
 
 ```bash
 python application.py
@@ -137,7 +112,7 @@ Open your browser at `http://127.0.0.1:5000`. Go to `/predictdata` to fill in th
 
 ---
 
-## 🌐 API Endpoints
+## API Endpoints
 
 | Route | Method | Description |
 |---|---|---|
@@ -148,7 +123,7 @@ Open your browser at `http://127.0.0.1:5000`. Go to `/predictdata` to fill in th
 ---
 
 
-## 📦 Dependencies
+## Dependencies
 
 ```
 pandas
